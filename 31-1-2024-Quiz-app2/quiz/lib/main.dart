@@ -284,6 +284,7 @@ class _QuizAppState extends State<QuizApp> {
                       as List<Map<String, Object>>,
                   answerQuestion: _answerQuestion,
                   selectedAnswerIndex: _selectedAnswerIndex,
+                  
                 ),
               ],
             )
@@ -299,6 +300,7 @@ class _QuizAppState extends State<QuizApp> {
     setState(() {
       questionIndex = 0;
       totalScore = 0;
+      _selectedAnswerIndex = -1;
     });
   }
 }
@@ -308,6 +310,7 @@ class Quiz extends StatelessWidget {
   final List<Map<String, Object>> answers;
   final Function(int) answerQuestion;
   final int selectedAnswerIndex;
+ 
 
   const Quiz({
     super.key,
@@ -358,14 +361,16 @@ class Question extends StatelessWidget {
 class Answer extends StatelessWidget {
    final VoidCallback selectHandler;
    final String answerText;
-   final bool isSelected;
+   final isSelected;
    final int score;
+
 
   const Answer(
     this.selectHandler,
     this.answerText,
     this.isSelected,
-    this.score
+    this.score,
+    
   );
 
   @override
@@ -376,10 +381,8 @@ class Answer extends StatelessWidget {
       child: ElevatedButton(
         onPressed: selectHandler,
         style: ElevatedButton.styleFrom(
-               backgroundColor: isSelected
-               ? score==1 ? Colors.green
-               :Colors.red
-               :null,
+               backgroundColor: isSelected ? Colors.green : Colors.blue,
+               
         ),
         child: Text(answerText),
       ),
