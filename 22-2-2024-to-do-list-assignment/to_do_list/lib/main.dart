@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 class ToDoListScreen extends StatefulWidget {
   const ToDoListScreen({super.key});
   @override
-  _ToDoListScreenState createState() => _ToDoListScreenState();
+  State createState() => _ToDoListScreenState();
 }
 
 class _ToDoListScreenState extends State<ToDoListScreen> {
@@ -26,6 +26,13 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
   TextEditingController dateController = TextEditingController();
+
+  List colorList=const [
+    Color.fromRGBO(250, 232, 232, 1),
+    Color.fromRGBO(232, 237, 250, 1),
+    Color.fromRGBO(250, 249, 232, 1),
+    Color.fromRGBO(250, 232, 250, 1),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +43,16 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 10,
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: tasks.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  
+                return Container(
+                  color: colorList[index % colorList.length],
+                child:ListTile(                
                   leading: Text(tasks[index].title),
                   title: Text(tasks[index].content),
                   subtitle: Text(tasks[index].date),
@@ -54,6 +65,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                       });
                     },
                   ),
+                )
                 );
               },
             ),
